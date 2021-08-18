@@ -18,4 +18,11 @@ JARFILE="$( ls -r "$MYDIR"/cfr-*.jar | head -1 )"
 [ "$OSTYPE" = "cygwin" ] \
 && JARFILE="$( cygpath -m "$JARFILE" )"
 
-java -jar "$JARFILE" "$@"
+case " $@ " in
+*' --version '* )
+	java -jar "$JARFILE" 2>&1 | head -1
+	;;
+* )
+	java -jar "$JARFILE" "$@"
+	;;
+esac

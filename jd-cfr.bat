@@ -10,7 +10,12 @@
 
 for /f "tokens=*" %%f in ( '
 	dir /o-n /b /s "%~dp0cfr-*.jar"
+' ) do if "%~1" == "--version" for /f "tokens=*" %%s in ( '
+	java -jar "%%~f" 2^>^&1
 ' ) do (
+	echo:%%~s
+	goto :EOF
+) else (
 	java -jar "%%~f" %*
 	goto :EOF
 )
