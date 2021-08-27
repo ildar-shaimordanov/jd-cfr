@@ -9,7 +9,7 @@
 @echo off
 
 for /f "tokens=*" %%f in ( '
-	dir /o-n /b /s "%~dp0cfr-*.jar"
+	dir /o-n /b /s "%~dp0cfr-*.jar" 2^>nul
 ' ) do if "%~1" == "--version" for /f "tokens=*" %%s in ( '
 	java -jar "%%~f" 2^>^&1
 ' ) do (
@@ -19,3 +19,6 @@ for /f "tokens=*" %%f in ( '
 	java -jar "%%~f" %*
 	goto :EOF
 )
+
+echo:No CFR jarfile found
+exit /b 255

@@ -10,11 +10,20 @@
 # It looks for the latest Jar file in the same directory.
 
 set -o errexit
-set -o pipefail
 
 MYDIR="$( dirname "$0" )"
-JARFILE="$( ls -r "$MYDIR"/cfr-*.jar | head -1 )"
+JARFILE="$(
+	find "$MYDIR" -maxdepth 1 -type f -name 'cfr-*.jar' \
+	| sort -rn \
+	| head -1
+)"
 
+[ -n "$JARFILE" ] || {
+	echo "No CFR jarfile found">&2
+	exit 255
+}
+
+# shellcheck disable=SC2039
 [ "$OSTYPE" = "cygwin" ] \
 && JARFILE="$( cygpath -m "$JARFILE" )"
 
