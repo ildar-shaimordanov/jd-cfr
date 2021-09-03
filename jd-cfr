@@ -27,11 +27,9 @@ JARFILE="$(
 [ "$OSTYPE" = "cygwin" ] \
 && JARFILE="$( cygpath -m "$JARFILE" )"
 
-case " $@ " in
-*' --version '* )
+if [ "x$1" = "x--version" ]
+then
 	java -jar "$JARFILE" 2>&1 | head -1
-	;;
-* )
+else
 	java -jar "$JARFILE" "$@"
-	;;
-esac
+fi
