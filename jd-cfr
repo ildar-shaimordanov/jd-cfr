@@ -23,11 +23,11 @@ JARFILE="$(
 	exit 255
 }
 
-# shellcheck disable=SC2039
+# shellcheck disable=SC2039,SC3028
 [ "$OSTYPE" = "cygwin" ] \
 && JARFILE="$( cygpath -m "$JARFILE" )"
 
-if [ "x$1" = "x--version" ]
+if [ "$1" = "--version" ]
 then
 	java -jar "$JARFILE" 2>&1 | head -1
 else
