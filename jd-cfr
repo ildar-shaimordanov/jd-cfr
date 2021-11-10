@@ -29,7 +29,7 @@ JARFILE="$(
 
 if [ "$1" = "--version" ]
 then
-	java -jar "$JARFILE" 2>&1 | head -1
+	java -jar "$JARFILE" 2>&1 | head -1 >&2
 else
 	java -jar "$JARFILE" "$@"
 fi

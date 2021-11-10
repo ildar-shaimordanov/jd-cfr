@@ -13,7 +13,7 @@ for /f "tokens=*" %%f in ( '
 ' ) do if "%~1" == "--version" for /f "tokens=*" %%s in ( '
 	java -jar "%%~f" 2^>^&1
 ' ) do (
-	echo:%%~s
+	echo:%%~s>&2
 	goto :EOF
 ) else (
 	java -jar "%%~f" %*
